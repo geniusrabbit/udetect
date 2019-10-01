@@ -30,7 +30,7 @@ enum DeviceType {
 }
 
 message UUID {
-  repeated bytes value = 1;
+  bytes value = 1;
 }
 
 message Carrier {

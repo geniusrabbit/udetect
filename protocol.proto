@@ -1,0 +1,195 @@
+syntax = "proto3";
+
+package udetect;
+
+import "google/api/annotations.proto";
+// import "protoc-gen-swagger/options/annotations.proto";
+
+enum ConnType {
+  Unknown  = 0;
+	Ethernet = 1;
+	WIFI     = 2;
+	Cell     = 3;
+	Cell2G   = 4;
+	Cell3G   = 5;
+	Cell4G   = 6;
+	Cell5G   = 7;
+}
+
+enum DeviceType {
+  Undefined = 0;
+  Mobile    = 1; // Mobile/Tablet
+  PC        = 2; // Personal Computer
+  TV        = 3; // Connected TV
+  Phone     = 4; // SmartPhone, SmallScreen
+  Tablet    = 5;
+  Connected = 6; // Console, EReader, SmartWatch
+  SetTopBox = 7; // MediaHub
+  Watch     = 8; // SmartWatch
+  Glasses   = 9; // SmartGlasses
+}
+
+message UUID {
+  repeated bytes value = 1;
+}
+
+message Carrier {
+  uint64      id = 1;
+  string      name = 2;
+  string      code = 3;
+}
+
+message User {
+  // Unical User Identificator inside the traking system and provided to the user device
+  UUID             uuid          = 1;
+  
+  // Session Identificator inside the traking system and provided to the user device
+  UUID             sessid        = 2;
+  
+  // Minimal possible age of the user
+  int32            age_start     = 3;
+  
+  // Maximal possible age of the user
+  int32            age_end       = 4;
+  
+  // main keywords interested by user
+  repeated string  keywords     = 5;
+
+  reserved 6, 7, 8, 9;
+}
+
+message OS {
+  uint64      id = 1;
+
+  // Name of the OS; like MacOS, Linux, Unix, etc.
+  string      name = 2;
+
+  // Indicates the version or subversion of the software platform.
+  string      version = 3;
+}
+
+message Browser {
+  uint64      id = 1;
+
+  // Name of the browser; like Safari, Chrome, Firefox, etc.
+  string      name = 2;
+
+  // Indicates the version or subversion of the browser.
+  string      version = 3;
+
+  // Is browser UA was detected as robot
+  int32       is_robot = 4;
+}
+
+message Device {
+  uint64      id = 1;
+
+  // Indicates the name of the company that manufactures the device
+  // or primarily sells it, e.g. Samsung.
+  string      make = 2;
+  
+  // Indicates the model name or number used primarily by the hardware
+  // vendor to identify the device, e.g.SM-T805S. When a model identifier
+  // is not available the HardwareName will be used.
+  string      model = 3;
+  
+  // Indicates the name and version of the operating system the device is using.
+  OS          os = 4;
+
+  // Browser information model
+  Browser     browser = 5;
+  
+  // Connection type of the device
+  ConnType    connectiontype = 6;
+  
+  // Indicates the type of the device based on values set in other properties,
+  // such as IsMobile, IsTablet, IsSmartphone, IsSmallScreen etc.
+  DeviceType  devicetype = 7;
+
+  // Physical height of the screen in pixels.
+  // Indicates the height of the device's screen in pixels.
+  // This property is not applicable for a device that does not have a screen.
+  // For devices such as tablets or TV which are predominantly used in landscape mode,
+  // the pixel height will be the smaller value compared to the pixel width.
+  int32       height = 8;
+
+  // Physical width of the screen in pixels
+  // Indicates the width of the device's screen in pixels.
+  // This property is not applicable for a device that does not have a screen.
+  // For devices such as tablets or TV which are predominantly used in landscape mode,
+  // the pixel width will be the larger value compared to the pixel height.
+  int32       width = 9;
+
+  // Screen size as pixels per linear inch.
+  // ((ScreenPixelsWidth / ScreenInchesWidth) + (ScreenPixelsHeight / ScreenInchesHeight)) / 2
+  int32       ppi   = 10;
+
+  // The ratio of physical pixels to device independent pixels.
+  float       px_ratio = 11;
+  
+  // Hardware version of the device (e.g., "5S" for iPhone 5S).
+	string      hwver = 12;
+}
+
+message GeoLocation {
+  // Internal ID
+  uint64      id = 1;
+
+  // IPv4/6
+  string      ip = 2;
+
+  // Carrier or ISP derived from the IP address
+  Carrier     carrier = 3;
+
+  // Latitude from -90 to 90
+  float       lat = 4;
+
+  // Longitude from -180 to 180
+  float       lon = 5;
+
+  // Country using ISO 3166-1 Alpha 2
+  string      country = 6;
+
+  // Region using ISO 3166-2
+  string      region = 7;
+
+  // Region of a country using FIPS 10-4
+  string      regionFIPS104 = 8;
+
+  string      metro = 9;
+
+  string      city = 10;
+
+  string      zip = 11;
+
+  // Local time as the number +/- of minutes from UTC
+	int32       utc_offset = 12;
+}
+
+message Request {
+  UUID    uid     = 1;
+  UUID    sessid  = 2;
+  string  ip      = 3;
+  string  ua      = 4;
+  string  url     = 5;
+}
+
+message Response {
+  // User person information which might be detected
+  User        user     = 1;
+
+  // Device information including browser and OS
+  Device      device   = 2;
+
+  // Location of the device assumed to be the user’s current location defined by a Geo object
+  GeoLocation geo      = 3;
+}
+
+service Detector {
+  rpc Detect(Request) returns (Response) {
+    option (google.api.http) = {
+      post: "/v1/detect"
+      body: "*"
+    };
+  };
+}

@@ -167,11 +167,12 @@ message GeoLocation {
 }
 
 message Request {
-  UUID    uid     = 1;
-  UUID    sessid  = 2;
-  string  ip      = 3;
-  string  ua      = 4;
-  string  url     = 5;
+  string  udid    = 1; // Advertisement Device ID (IDFA, AAID)
+  UUID    uid     = 2;
+  UUID    sessid  = 3;
+  string  ip      = 4;
+  string  ua      = 5;
+  string  url     = 6;
 }
 
 message Response {

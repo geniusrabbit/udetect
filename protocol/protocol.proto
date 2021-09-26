@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package udetect;
 
+option go_package = "github.com/sspserver/udetect/protocol";
+
 import "google/api/annotations.proto";
 // import "protoc-gen-swagger/options/annotations.proto";
 
@@ -45,17 +47,20 @@ message User {
   
   // Session Identificator inside the traking system and provided to the user device
   UUID             sessid        = 2;
+
+  // Fingerprint of the 
+  string           Fingerprint   = 3;
   
   // Minimal possible age of the user
-  int32            age_start     = 3;
+  int32            age_start     = 4;
   
   // Maximal possible age of the user
-  int32            age_end       = 4;
+  int32            age_end       = 5;
   
   // main keywords interested by user
-  repeated string  keywords     = 5;
+  repeated string  keywords      = 6;
 
-  reserved 6, 7, 8, 9;
+  reserved 7, 8, 9, 10;
 }
 
 message OS {
@@ -167,12 +172,25 @@ message GeoLocation {
 }
 
 message Request {
-  string  udid    = 1; // Advertisement Device ID (IDFA, AAID)
-  UUID    uid     = 2;
-  UUID    sessid  = 3;
-  string  ip      = 4;
-  string  ua      = 5;
-  string  url     = 6;
+  // Advertiser Device ID (IDFA, AAID), Identifier for Advertising (IFA)
+  string  udid              = 1;
+  UUID    uid               = 2;
+  UUID    sessid            = 3;
+  string  ip                = 4;
+  string  ua                = 5;
+  string  url               = 6;
+  string  ref               = 7;
+  bool    DNT               = 8;
+  bool    LMT               = 9;
+  bool    adblock           = 10;
+  bool    private_browsing  = 11;
+  bool    js                = 12;
+  repeated string languages = 13;
+  string  primary_language  = 14;
+  string  flash_ver         = 15;
+  int32   width             = 16;
+  int32   height            = 17;
+  reserved 18;
 }
 
 message Response {
@@ -191,6 +209,10 @@ service Detector {
     option (google.api.http) = {
       post: "/v1/detect"
       body: "*"
+
+      additional_bindings {
+				get: "/v1/detect"
+			}
     };
   };
 }

@@ -1,4 +1,4 @@
-package udetect
+package protocol
 
 import (
 	"bytes"

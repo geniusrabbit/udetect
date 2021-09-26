@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  server:
+    tty: true
+    image: golang:latest
+    command: .build/server
+    working_dir: /project/
+    ports:
+      - "8280:8080"
+      - "8281:8081"
+    volumes:
+      - ../../:/project/

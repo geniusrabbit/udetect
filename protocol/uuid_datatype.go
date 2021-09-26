@@ -1,9 +1,9 @@
-package udetect
+package protocol
 
 import (
 	"bytes"
 	"encoding/json"
-	fmt "fmt"
+	"fmt"
 
 	"github.com/google/uuid"
 )
@@ -14,7 +14,12 @@ func UUIDFromString(suuid string) (*UUID, error) {
 	if err != nil {
 		return nil, err
 	}
-	data, err := _uuid.MarshalBinary()
+	return UUIDFrom(_uuid)
+}
+
+// UUIDFrom from type UUID
+func UUIDFrom(uuid uuid.UUID) (*UUID, error) {
+	data, err := uuid.MarshalBinary()
 	if err != nil {
 		return nil, err
 	}
@@ -27,7 +32,7 @@ func (ud *UUID) UUIDObject() (uuid.UUID, error) {
 }
 
 // MarshalJSON implements json.Marshaler interface
-func (ud UUID) MarshalJSON() ([]byte, error) {
+func (ud *UUID) MarshalJSON() ([]byte, error) {
 	_uuid, err := ud.UUIDObject()
 	if err != nil {
 		return nil, err
@@ -60,7 +65,7 @@ func (ud *UUID) UnmarshalJSON(data []byte) error {
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (ud UUID) MarshalText() ([]byte, error) {
+func (ud *UUID) MarshalText() ([]byte, error) {
 	_uuid, err := ud.UUIDObject()
 	if err != nil {
 		return nil, err
@@ -86,7 +91,7 @@ func (ud *UUID) UnmarshalText(data []byte) error {
 }
 
 // MarshalBinary implements encoding.BinaryMarshaler.
-func (ud UUID) MarshalBinary() ([]byte, error) {
+func (ud *UUID) MarshalBinary() ([]byte, error) {
 	return ud.Value, nil
 }
 

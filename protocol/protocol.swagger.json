@@ -1,0 +1,532 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protocol/protocol.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/detect": {
+      "get": {
+        "operationId": "Detector_Detect2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/udetectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "udid",
+            "description": "Advertiser Device ID (IDFA, AAID), Identifier for Advertising (IFA).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "uid.value",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "byte"
+          },
+          {
+            "name": "sessid.value",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "byte"
+          },
+          {
+            "name": "ip",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ua",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ref",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "DNT",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "LMT",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "adblock",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "private_browsing",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "js",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "languages",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "primary_language",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "flash_ver",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "width",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Detector"
+        ]
+      },
+      "post": {
+        "operationId": "Detector_Detect",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/udetectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/udetectRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Detector"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "udetectBrowser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the browser; like Safari, Chrome, Firefox, etc."
+        },
+        "version": {
+          "type": "string",
+          "description": "Indicates the version or subversion of the browser."
+        },
+        "is_robot": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Is browser UA was detected as robot"
+        }
+      }
+    },
+    "udetectCarrier": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "udetectConnType": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Ethernet",
+        "WIFI",
+        "Cell",
+        "Cell2G",
+        "Cell3G",
+        "Cell4G",
+        "Cell5G"
+      ],
+      "default": "Unknown"
+    },
+    "udetectDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "make": {
+          "type": "string",
+          "description": "Indicates the name of the company that manufactures the device\nor primarily sells it, e.g. Samsung."
+        },
+        "model": {
+          "type": "string",
+          "description": "Indicates the model name or number used primarily by the hardware\nvendor to identify the device, e.g.SM-T805S. When a model identifier\nis not available the HardwareName will be used."
+        },
+        "os": {
+          "$ref": "#/definitions/udetectOS",
+          "description": "Indicates the name and version of the operating system the device is using."
+        },
+        "browser": {
+          "$ref": "#/definitions/udetectBrowser",
+          "title": "Browser information model"
+        },
+        "connectiontype": {
+          "$ref": "#/definitions/udetectConnType",
+          "title": "Connection type of the device"
+        },
+        "devicetype": {
+          "$ref": "#/definitions/udetectDeviceType",
+          "description": "Indicates the type of the device based on values set in other properties,\nsuch as IsMobile, IsTablet, IsSmartphone, IsSmallScreen etc."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Physical height of the screen in pixels.\nIndicates the height of the device's screen in pixels.\nThis property is not applicable for a device that does not have a screen.\nFor devices such as tablets or TV which are predominantly used in landscape mode,\nthe pixel height will be the smaller value compared to the pixel width."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Physical width of the screen in pixels\nIndicates the width of the device's screen in pixels.\nThis property is not applicable for a device that does not have a screen.\nFor devices such as tablets or TV which are predominantly used in landscape mode,\nthe pixel width will be the larger value compared to the pixel height."
+        },
+        "ppi": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Screen size as pixels per linear inch.\n((ScreenPixelsWidth / ScreenInchesWidth) + (ScreenPixelsHeight / ScreenInchesHeight)) / 2"
+        },
+        "px_ratio": {
+          "type": "number",
+          "format": "float",
+          "description": "The ratio of physical pixels to device independent pixels."
+        },
+        "hwver": {
+          "type": "string",
+          "description": "Hardware version of the device (e.g., \"5S\" for iPhone 5S)."
+        }
+      }
+    },
+    "udetectDeviceType": {
+      "type": "string",
+      "enum": [
+        "Undefined",
+        "Mobile",
+        "PC",
+        "TV",
+        "Phone",
+        "Tablet",
+        "Connected",
+        "SetTopBox",
+        "Watch",
+        "Glasses"
+      ],
+      "default": "Undefined"
+    },
+    "udetectGeoLocation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Internal ID"
+        },
+        "ip": {
+          "type": "string",
+          "title": "IPv4/6"
+        },
+        "carrier": {
+          "$ref": "#/definitions/udetectCarrier",
+          "title": "Carrier or ISP derived from the IP address"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float",
+          "title": "Latitude from -90 to 90"
+        },
+        "lon": {
+          "type": "number",
+          "format": "float",
+          "title": "Longitude from -180 to 180"
+        },
+        "country": {
+          "type": "string",
+          "title": "Country using ISO 3166-1 Alpha 2"
+        },
+        "region": {
+          "type": "string",
+          "title": "Region using ISO 3166-2"
+        },
+        "regionFIPS104": {
+          "type": "string",
+          "title": "Region of a country using FIPS 10-4"
+        },
+        "metro": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        },
+        "utc_offset": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Local time as the number +/- of minutes from UTC"
+        }
+      }
+    },
+    "udetectOS": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the OS; like MacOS, Linux, Unix, etc."
+        },
+        "version": {
+          "type": "string",
+          "description": "Indicates the version or subversion of the software platform."
+        }
+      }
+    },
+    "udetectRequest": {
+      "type": "object",
+      "properties": {
+        "udid": {
+          "type": "string",
+          "title": "Advertiser Device ID (IDFA, AAID), Identifier for Advertising (IFA)"
+        },
+        "uid": {
+          "$ref": "#/definitions/udetectUUID"
+        },
+        "sessid": {
+          "$ref": "#/definitions/udetectUUID"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "ua": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "ref": {
+          "type": "string"
+        },
+        "DNT": {
+          "type": "boolean"
+        },
+        "LMT": {
+          "type": "boolean"
+        },
+        "adblock": {
+          "type": "boolean"
+        },
+        "private_browsing": {
+          "type": "boolean"
+        },
+        "js": {
+          "type": "boolean"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "primary_language": {
+          "type": "string"
+        },
+        "flash_ver": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "udetectResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/udetectUser",
+          "title": "User person information which might be detected"
+        },
+        "device": {
+          "$ref": "#/definitions/udetectDevice",
+          "title": "Device information including browser and OS"
+        },
+        "geo": {
+          "$ref": "#/definitions/udetectGeoLocation",
+          "title": "Location of the device assumed to be the user’s current location defined by a Geo object"
+        }
+      }
+    },
+    "udetectUUID": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "udetectUser": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "$ref": "#/definitions/udetectUUID",
+          "title": "Unical User Identificator inside the traking system and provided to the user device"
+        },
+        "sessid": {
+          "$ref": "#/definitions/udetectUUID",
+          "title": "Session Identificator inside the traking system and provided to the user device"
+        },
+        "Fingerprint": {
+          "type": "string",
+          "title": "Fingerprint of the"
+        },
+        "age_start": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Minimal possible age of the user"
+        },
+        "age_end": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Maximal possible age of the user"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "main keywords interested by user"
+        }
+      }
+    }
+  }
+}

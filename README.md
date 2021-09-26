@@ -1,6 +1,6 @@
 # UDetect protocol
 
-[![Build Status](https://travis-ci.org/sspserver/udetect.svg?branch=master)](https://travis-ci.org/sspserver/udetect)
+[![Build Status](https://github.com/sspserver/udetect/workflows/run%20tests/badge.svg)](https://github.com/sspserver/udetect/actions?workflow=run%20tests)
 [![Go Report Card](https://goreportcard.com/badge/github.com/sspserver/udetect)](https://goreportcard.com/report/github.com/sspserver/udetect)
 [![GoDoc](https://godoc.org/github.com/sspserver/udetect?status.svg)](https://godoc.org/github.com/sspserver/udetect)
 [![Coverage Status](https://coveralls.io/repos/github/sspserver/udetect/badge.svg)](https://coveralls.io/github/sspserver/udetect)
@@ -16,6 +16,7 @@ no very sensitive for security reasons information about user person.
 
 ## TODO
 
-* [ ] Provide minimal realisation with geo and device detection without user information
-* [ ] Extend Golan objects with extra methods to manipulate objects
-* [ ] Add support UUID converter
+* [ ] Add docker client example
+* [x] Add minimal implementation of detector server
+* [x] Provide minimal realisation with geo and device detection without user information
+* [x] Add support UUID converter

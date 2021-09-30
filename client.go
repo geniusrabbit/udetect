@@ -82,9 +82,14 @@ func (c *Client) Detect(ctx context.Context, req *Request) (*Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	userUUID, err := uuid.Parse(resp.User.GetUuid().String())
-	if err != nil {
-		return nil, err
+	var userUUID uuid.UUID
+	if resp.User.GetUuid() != nil {
+		userUUID, err = uuid.Parse(resp.User.GetUuid().String())
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		userUUID = uuid.New()
 	}
 	return &Response{
 		User: &User{

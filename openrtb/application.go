@@ -1,24 +1,12 @@
 package openrtb
 
-import "github.com/bsm/openrtb"
-
-// App information
-type App struct {
-	ExtID         string   `json:"eid,omitempty"`          // External ID
-	Keywords      string   `json:"keywords,omitempty"`     // Comma separated list of keywords about the site.
-	Cat           []string `json:"cat,omitempty"`          // Array of categories
-	Bundle        string   `json:"bundle,omitempty"`       // App bundle or package name
-	StoreURL      string   `json:"storeurl,omitempty"`     // App store URL for an installed app
-	Ver           string   `json:"ver,omitempty"`          // App version
-	Paid          int      `json:"paid,omitempty"`         // "1": Paid, "2": Free
-	PrivacyPolicy int      `json:"pivacypolicy,omitempty"` // Default: 1 ("1": has a privacy policy)
-}
-
-// AppDefault object
-var AppDefault App
+import (
+	"github.com/bsm/openrtb"
+	"github.com/sspserver/udetect"
+)
 
 // ApplicationFrom returnds openrtb App type
-func ApplicationFrom(a *App) *openrtb.App {
+func ApplicationFrom(a *udetect.App) *openrtb.App {
 	if a == nil {
 		return nil
 	}

@@ -67,6 +67,13 @@ func (tr *Transport) Detect(req *protocol.Request) (resp *protocol.Response, err
 	return resp, nil
 }
 
+func (tr *Transport) Close() error {
+	if tr.client != nil {
+		tr.client.CloseIdleConnections()
+	}
+	return nil
+}
+
 func (tr *Transport) preparedURL(req *protocol.Request) string {
 	if !tr.isPreparableURL {
 		return tr.url

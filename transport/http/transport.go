@@ -2,6 +2,7 @@ package http
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"net/http"
 	"strings"
@@ -37,29 +38,25 @@ func NewTransport(url string, options ...Option) *Transport {
 }
 
 // Detect information from request
-func (tr *Transport) Detect(req *protocol.Request) (resp *protocol.Response, err error) {
-	var (
-		httpRequest  *http.Request
-		httpResponse *http.Response
-		body         *bytes.Buffer
-	)
+func (tr *Transport) Detect(ctx context.Context, req *protocol.Request) (*protocol.Response, error) {
+	var body *bytes.Buffer
 	if tr.method == http.MethodPost {
 		var data bytes.Buffer
-		if err = json.NewEncoder(&data).Encode(req); err != nil {
+		if err := json.NewEncoder(&data).Encode(req); err != nil {
 			return nil, err
 		}
 		body = &data
 	}
-	httpRequest, err = http.NewRequest(tr.method, tr.preparedURL(req), body)
+	httpRequest, err := http.NewRequest(tr.method, tr.preparedURL(req), body)
 	if err != nil {
 		return nil, err
 	}
-	httpResponse, err = tr.client.Do(httpRequest)
+	httpResponse, err := tr.client.Do(httpRequest)
 	if err != nil {
 		return nil, err
 	}
 	defer httpResponse.Body.Close()
-	resp = &protocol.Response{}
+	resp := &protocol.Response{}
 	err = json.NewDecoder(httpResponse.Body).Decode(resp)
 	if err != nil {
 		return nil, err

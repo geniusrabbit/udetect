@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/sspserver/udetect/protocol"
+	"github.com/geniusrabbit/udetect/protocol"
 )
 
 const (

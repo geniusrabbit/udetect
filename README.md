@@ -1,8 +1,8 @@
 # UDetect protocol
 
-[![Build Status](https://github.com/sspserver/udetect/workflows/run%20tests/badge.svg)](https://github.com/sspserver/udetect/actions?workflow=run%20tests)
-[![Go Report Card](https://goreportcard.com/badge/github.com/sspserver/udetect)](https://goreportcard.com/report/github.com/sspserver/udetect)
-[![GoDoc](https://godoc.org/github.com/sspserver/udetect?status.svg)](https://godoc.org/github.com/sspserver/udetect)
+[![Build Status](https://github.com/geniusrabbit/udetect/workflows/run%20tests/badge.svg)](https://github.com/geniusrabbit/udetect/actions?workflow=run%20tests)
+[![Go Report Card](https://goreportcard.com/badge/github.com/geniusrabbit/udetect)](https://goreportcard.com/report/github.com/geniusrabbit/udetect)
+[![GoDoc](https://godoc.org/github.com/geniusrabbit/udetect?status.svg)](https://godoc.org/github.com/geniusrabbit/udetect)
 [![Coverage Status](https://coveralls.io/repos/github/sspserver/udetect/badge.svg)](https://coveralls.io/github/sspserver/udetect)
 
 > License Apache 2.0

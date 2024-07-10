@@ -3,7 +3,7 @@ package openrtb
 import (
 	"github.com/bsm/openrtb"
 
-	"github.com/sspserver/udetect"
+	"github.com/geniusrabbit/udetect"
 )
 
 // SiteFrom returns OpenRTB Site type

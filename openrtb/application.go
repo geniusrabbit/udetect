@@ -2,7 +2,7 @@ package openrtb
 
 import (
 	"github.com/bsm/openrtb"
-	"github.com/sspserver/udetect"
+	"github.com/geniusrabbit/udetect"
 )
 
 // ApplicationFrom returnds openrtb App type

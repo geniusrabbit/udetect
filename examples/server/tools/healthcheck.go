@@ -5,7 +5,7 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/sspserver/udetect/examples/server/context/ctxlogger"
+	"github.com/geniusrabbit/udetect/examples/server/context/ctxlogger"
 )
 
 // HealthCheck of service

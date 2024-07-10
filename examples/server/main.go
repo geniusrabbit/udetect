@@ -11,10 +11,10 @@ import (
 	"go.uber.org/zap/zapcore"
 
 	"github.com/demdxx/goconfig"
-	"github.com/sspserver/udetect/examples/server/api"
-	"github.com/sspserver/udetect/examples/server/context/config"
-	"github.com/sspserver/udetect/examples/server/context/ctxlogger"
-	"github.com/sspserver/udetect/examples/server/grpcserver"
+	"github.com/geniusrabbit/udetect/examples/server/api"
+	"github.com/geniusrabbit/udetect/examples/server/context/config"
+	"github.com/geniusrabbit/udetect/examples/server/context/ctxlogger"
+	"github.com/geniusrabbit/udetect/examples/server/grpcserver"
 )
 
 var (

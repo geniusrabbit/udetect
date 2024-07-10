@@ -4,7 +4,7 @@ import (
 	"context"
 	"io"
 
-	"github.com/sspserver/udetect/protocol"
+	"github.com/geniusrabbit/udetect/protocol"
 )
 
 // Transport interface defenition

@@ -11,7 +11,7 @@ import (
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 
-	"github.com/sspserver/udetect/protocol"
+	"github.com/geniusrabbit/udetect/protocol"
 )
 
 type Transport struct {

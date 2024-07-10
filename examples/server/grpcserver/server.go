@@ -20,9 +20,9 @@ import (
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/sspserver/udetect/examples/server/middleware"
-	"github.com/sspserver/udetect/examples/server/tools"
-	"github.com/sspserver/udetect/protocol"
+	"github.com/geniusrabbit/udetect/examples/server/middleware"
+	"github.com/geniusrabbit/udetect/examples/server/tools"
+	"github.com/geniusrabbit/udetect/protocol"
 )
 
 type contextWrapper func(context.Context) context.Context

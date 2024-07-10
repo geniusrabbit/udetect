@@ -9,8 +9,8 @@ import (
 
 	swaggerFiles "github.com/swaggo/files"
 
-	"github.com/sspserver/udetect/examples/server/context/ctxlogger"
-	"github.com/sspserver/udetect/protocol"
+	"github.com/geniusrabbit/udetect/examples/server/context/ctxlogger"
+	"github.com/geniusrabbit/udetect/protocol"
 )
 
 // SwaggerServer returns swagger specification files located under "/swagger/"

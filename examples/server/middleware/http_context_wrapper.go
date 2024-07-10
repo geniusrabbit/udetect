@@ -10,7 +10,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 
-	"github.com/sspserver/udetect/examples/server/context/ctxlogger"
+	"github.com/geniusrabbit/udetect/examples/server/context/ctxlogger"
 )
 
 // HTTPContextWrapper global middelware of the HTTP rounter

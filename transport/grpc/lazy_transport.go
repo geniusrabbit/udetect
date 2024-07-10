@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/geniusrabbit/udetect/protocol"
 	"github.com/hashicorp/go-multierror"
-	"github.com/sspserver/udetect/protocol"
 )
 
 // APIClient alias

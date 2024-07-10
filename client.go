@@ -7,7 +7,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/sspserver/udetect/protocol"
+	"github.com/geniusrabbit/udetect/protocol"
 )
 
 // Request object

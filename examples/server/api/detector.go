@@ -4,7 +4,7 @@ import (
 	"context"
 	"math/rand"
 
-	"github.com/sspserver/udetect/protocol"
+	"github.com/geniusrabbit/udetect/protocol"
 )
 
 // Detector API implementation

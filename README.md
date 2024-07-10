@@ -1,6 +1,6 @@
 # UDetect protocol
 
-[![Build Status](https://github.com/geniusrabbit/udetect/workflows/run%20tests/badge.svg)](https://github.com/geniusrabbit/udetect/actions?workflow=run%20tests)
+[![Build Status](https://github.com/geniusrabbit/udetect/workflows/Tests/badge.svg)](https://github.com/geniusrabbit/udetect/actions?workflow=Tests)
 [![Go Report Card](https://goreportcard.com/badge/github.com/geniusrabbit/udetect)](https://goreportcard.com/report/github.com/geniusrabbit/udetect)
 [![GoDoc](https://godoc.org/github.com/geniusrabbit/udetect?status.svg)](https://godoc.org/github.com/geniusrabbit/udetect)
 [![Coverage Status](https://coveralls.io/repos/github/sspserver/udetect/badge.svg)](https://coveralls.io/github/sspserver/udetect)

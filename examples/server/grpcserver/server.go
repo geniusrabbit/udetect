@@ -16,7 +16,7 @@ import (
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
-	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
@@ -98,7 +98,7 @@ func (s *GRPCServer) RunHTTP(ctx context.Context, address string) error {
 	// @link https://grpc-ecosystem.github.io/grpc-gateway/docs/mapping/customizing_your_gateway/
 	gw := runtime.NewServeMux(
 		runtime.WithMarshalerOption("*", &marshalel{
-			Marshaler:   &runtime.JSONPb{OrigName: true},
+			Marshaler:   &runtime.JSONPb{},
 			contentType: "application/json; charset=UTF-8",
 		}),
 	)
@@ -164,4 +164,4 @@ type marshalel struct {
 	runtime.Marshaler
 }
 
-func (m *marshalel) ContentType() string { return m.contentType }
+func (m *marshalel) ContentType(any) string { return m.contentType }

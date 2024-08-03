@@ -12,7 +12,7 @@ type Site struct {
 	PrivacyPolicy int      `json:"pivacypolicy,omitempty"` // Default: 1 ("1": has a privacy policy)
 	Keywords      string   `json:"keywords,omitempty"`     // Comma separated list of keywords about the site.
 	Page          string   `json:"page,omitempty"`         // URL of the page
-	Ref           string   `json:"ref,omitempty"`          // Referrer URL
+	Referrer      string   `json:"ref,omitempty"`          // Referrer URL
 	Search        string   `json:"search,omitempty"`       // Search string that caused naviation
 	Mobile        int      `json:"mobile,omitempty"`       // Mobile ("1": site is mobile optimised)
 }

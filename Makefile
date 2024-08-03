@@ -4,7 +4,6 @@ ifndef $(GOPATH)
     export GOPATH
 endif
 
-
 APP_TAGS ?= ""
 BUILD_GOOS ?= linux
 BUILD_GOARCH ?= amd64
@@ -22,32 +21,30 @@ ifeq ($(BUILD_VERSION),)
 	BUILD_VERSION := commit-$(COMMIT_NUMBER)
 endif
 
-
 .PHONY: lint
 lint: golint ## Run linter checks
 
-
 .PHONY: tidy
-tidy:
+tidy: ## Run go mod tidy
 	go mod tidy
-
 
 .PHONY: test
 test: ## Run unit tests
 	go test -v -race ./...
-
 
 .PHONY: golint
 golint: $(GOLANGLINTCI)
 	# golint -set_exit_status ./...
 	golangci-lint run -v ./...
 
-
 .PHONY: fmt
 fmt: ## Run formatting code
 	@echo "Fix formatting"
 	@gofmt -w ${GO_FMT_FLAGS} $$(go list -f "{{ .Dir }}" ./...); if [ "$${errors}" != "" ]; then echo "$${errors}"; fi
 
+.PHONY: buf-generate
+buf-generate: ## Not use
+	cd protocol && buf generate
 
 .PHONY: build-proto
 build-proto: ## Build protocol objects from protobuf defenition
@@ -57,7 +54,7 @@ build-proto: ## Build protocol objects from protobuf defenition
 	# go install github.com/golang/protobuf/protoc-gen-go
 	# go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 	protoc -I/usr/local/include -I. -I$(GOPATH)/src \
-		-I$(GOPATH)/pkg/mod/github.com/googleapis/api-common-protos@v0.1.0 \
+		-Isubmodules/googleapis \
 		--go_out . --go_opt paths=source_relative \
 		--go-grpc_out . --go-grpc_opt paths=source_relative \
 		--grpc-gateway_out . --grpc-gateway_opt paths=source_relative \
@@ -65,11 +62,9 @@ build-proto: ## Build protocol objects from protobuf defenition
 		--swagger_out=logtostderr=true:. \
 		protocol/*.proto
 
-
 .PHONY: help
 help: ## Print help description
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-
 
 .PHONY: build-example
 build-example: ## Build example server
@@ -79,11 +74,9 @@ build-example: ## Build example server
 		go build -ldflags "-X main.buildDate=`date -u +%Y%m%d.%H%M%S` -X main.buildCommit=${COMMIT_NUMBER} -X main.appVersion=${BUILD_VERSION}" \
 			-tags ${APP_TAGS} -o ".build/server" examples/server/main.go
 
-
 .PHONY: run-server
 run-server: build-example ## Run example server
 	DOCKER_BUILDKIT=${DOCKER_BUILDKIT} docker compose -f docker/develop/docker-compose.yml run --rm server
-
 
 .PHONY: build-prod-example
 build-prod-example:
@@ -99,13 +92,11 @@ build-prod-example:
 		done \
 	done
 
-
 .PHONY: docker-build
 docker-build: build-prod-example ## Build docker example server
 	echo "Build server docker image"
 	DOCKER_BUILDKIT=${DOCKER_BUILDKIT} docker buildx build \
 		--push --platform linux/amd64,linux/arm64,darwin/amd64,darwin/arm64 \
 		-t ${DOCKER_CONTAINER_IMAGE} -f docker/server-example.dockerfile .
-
 
 .DEFAULT_GOAL := help

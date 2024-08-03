@@ -19,9 +19,9 @@ func SiteFrom(s *udetect.Site) *openrtb.Site {
 			Domain:        s.Domain,                //
 			PrivacyPolicy: intRef(s.PrivacyPolicy), // Default: 1 ("1": has a privacy policy)
 		},
-		Page:   s.Page,   // URL of the page
-		Ref:    s.Ref,    // Referrer URL
-		Search: s.Search, // Search string that caused naviation
-		Mobile: s.Mobile, // Mobile ("1": site is mobile optimised)
+		Page:   s.Page,     // URL of the page
+		Ref:    s.Referrer, // Referrer URL
+		Search: s.Search,   // Search string that caused naviation
+		Mobile: s.Mobile,   // Mobile ("1": site is mobile optimised)
 	}
 }

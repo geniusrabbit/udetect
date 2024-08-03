@@ -19,7 +19,7 @@ type Geo struct {
 	RegionFIPS104 string   `json:"regionFIPS104,omitempty"` // Region of a country using FIPS 10-4
 	Metro         string   `json:"metro,omitempty"`         //
 	City          string   `json:"city,omitempty"`          //
-	Zip           string   `json:"zip,omitempty"`           //
+	ZIP           string   `json:"zip,omitempty"`           //
 	UTCOffset     int      `json:"utcoffset,omitempty"`     // Local time as the number +/- of minutes from UTC
 }
 

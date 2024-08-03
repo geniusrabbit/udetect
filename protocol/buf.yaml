@@ -1,0 +1,11 @@
+version: v1
+name: github.com/geniusrabbit/udetect
+deps:
+  - buf.build/grpc-ecosystem/grpc-gateway:v2
+  - buf.build/googleapis/googleapis
+  - buf.build/grpc-ecosystem/protoc-gen-validate
+  - buf.build/grpc-ecosystem/protoc-gen-swagger
+  - ../submodules/googleapis
+# build:
+#   roots:
+#     - .

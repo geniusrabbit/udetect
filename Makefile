@@ -48,12 +48,12 @@ buf-generate: ## Not use
 
 .PHONY: build-proto
 build-proto: ## Build protocol objects from protobuf defenition
-	# go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
-	# go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
-	# go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
-	# go install github.com/golang/protobuf/protoc-gen-go
+	# go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
+	# go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-swagger@latest
+	# go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
+	# go install github.com/golang/protobuf/protoc-gen-go@latest
 	# go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-	protoc -I/usr/local/include -I. -I$(GOPATH)/src \
+	protoc -I. \
 		-Isubmodules/googleapis \
 		--go_out . --go_opt paths=source_relative \
 		--go-grpc_out . --go-grpc_opt paths=source_relative \

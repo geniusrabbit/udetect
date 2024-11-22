@@ -11,7 +11,7 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.9.0
-	google.golang.org/genproto/googleapis/api v0.0.0-20241113202542-65e8d215514f
+	google.golang.org/genproto/googleapis/api v0.0.0-20241118233622-e639e219e697
 	google.golang.org/grpc v1.68.0
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.5.1
 	google.golang.org/protobuf v1.35.2
@@ -29,6 +29,6 @@ require (
 	golang.org/x/net v0.31.0 // indirect
 	golang.org/x/sys v0.27.0 // indirect
 	golang.org/x/text v0.20.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20241113202542-65e8d215514f // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20241118233622-e639e219e697 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

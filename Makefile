@@ -78,9 +78,10 @@ help: ## Print help description
 build-example: ## Build example server
 	@echo "Build example server"
 	@rm -rf .build/server
+	cd examples/server/ && \
 	GOOS=${BUILD_GOOS} GOARCH=${BUILD_GOARCH} CGO_ENABLED=${BUILD_CGO_ENABLED} \
 		go build -ldflags "-X main.buildDate=`date -u +%Y%m%d.%H%M%S` -X main.buildCommit=${COMMIT_NUMBER} -X main.appVersion=${BUILD_VERSION}" \
-			-tags ${APP_TAGS} -o ".build/server" examples/server/main.go
+			-tags ${APP_TAGS} -o "../../.build/server" ./main.go
 
 .PHONY: run-server
 run-server: build-example ## Run example server
@@ -90,7 +91,7 @@ run-server: build-example ## Run example server
 build-prod-example:
 	@echo "Build server application"
 	@rm -rf .build/
-	cd examples/server/; \
+	@cd examples/server/; \
 	for os in $(OS_LIST); do \
 		for arch in $(ARCH_LIST); do \
 			echo "Build $$os/$$arch"; \

@@ -62,8 +62,8 @@ func DeviceFrom(d *udetect.Device, geo *udetect.Geo) *openrtb.Device {
 	return &openrtb.Device{
 		UA:           browser.UA,                      // User agent
 		Geo:          GeoFrom(geo),                    // Location of the device assumed to be the user’s current location
-		DNT:          browser.DNT,                     // "1": Do not track
-		LMT:          browser.LMT,                     // "1": Limit Ad Tracking
+		DNT:          int(browser.DNT),                // "1": Do not track
+		LMT:          int(browser.LMT),                // "1": Limit Ad Tracking
 		IP:           ipV4,                            // IPv4
 		IPv6:         geo.IPv6String(),                // IPv6
 		DeviceType:   OpenRTBDeviceType(d.DeviceType), // The general type of d.
@@ -76,7 +76,7 @@ func DeviceFrom(d *udetect.Device, geo *udetect.Geo) *openrtb.Device {
 		Width:        d.Width,                         // Physical width of the screen in pixels.
 		PPI:          d.PPI,                           // Screen size as pixels per linear inch.
 		PixelRatio:   d.PxRatio,                       // The ratio of physical pixels to device independent pixels.
-		JS:           browser.JS,                      // Javascript status ("0": Disabled, "1": Enabled)
+		JS:           int(browser.JS),                 // Javascript status ("0": Disabled, "1": Enabled)
 		GeoFetch:     0,                               // Indicates if the geolocation API will be available to JavaScript code running in the banner,
 		FlashVersion: browser.FlashVer,                // Flash version
 		Language:     browser.PrimaryLanguage,         // Browser language

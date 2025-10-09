@@ -21,7 +21,7 @@ type Request struct {
 	Ref             string      `json:"r,omitempty"`     // Referer
 	DNT             int8        `json:"dnt,omitempty"`   // "1": Do not track
 	LMT             int8        `json:"lmt,omitempty"`   // "1": Limit Ad Tracking
-	Adblock         int8        `json:"ab,omitempty"`    // "1": AdBlock is ON
+	AdBlock         int8        `json:"ab,omitempty"`    // "1": AdBlock is ON
 	PrivateBrowsing int8        `json:"pb,omitempty"`    // "1": Private Browsing mode ON
 	JS              int8        `json:"js,omitempty"`    //
 	Languages       []string    `json:"langs,omitempty"` //
@@ -69,7 +69,7 @@ func (c *Client) Detect(ctx context.Context, req *Request) (*Response, error) {
 		Ref:             req.Ref,
 		DNT:             req.DNT == 1,
 		LMT:             req.LMT == 1,
-		Adblock:         req.Adblock == 1,
+		Adblock:         req.AdBlock == 1,
 		PrivateBrowsing: req.PrivateBrowsing == 1,
 		Js:              req.JS == 1,
 		Languages:       req.Languages,
@@ -117,7 +117,7 @@ func (c *Client) Detect(ctx context.Context, req *Request) (*Response, error) {
 				Version:         resp.Device.Browser.GetVersion(),
 				DNT:             req.DNT,
 				LMT:             req.LMT,
-				Adblock:         req.Adblock,
+				AdBlock:         req.AdBlock,
 				PrivateBrowsing: req.PrivateBrowsing,
 				UA:              req.UA,
 				Ref:             req.Ref,

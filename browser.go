@@ -7,7 +7,7 @@ type Browser struct {
 	Version         string      `json:"ver,omitempty"`  //
 	DNT             int8        `json:"dnt,omitempty"`  // "1": Do not track
 	LMT             int8        `json:"lmt,omitempty"`  // "1": Limit Ad Tracking
-	Adblock         int8        `json:"ab,omitempty"`   // "1": AdBlock is ON
+	AdBlock         int8        `json:"ab,omitempty"`   // "1": AdBlock is ON
 	PrivateBrowsing int8        `json:"pb,omitempty"`   // "1": Private Browsing mode ON
 	IsRobot         int8        `json:"rb,omitempty"`
 	JS              int8        `json:"js,omitempty"`    //

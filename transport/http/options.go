@@ -36,7 +36,6 @@ func WithTimeout(timeout, keepAlive time.Duration) Option {
 			t.DialContext = (&net.Dialer{
 				Timeout:   timeout,
 				KeepAlive: keepAlive,
-				DualStack: true,
 			}).DialContext
 			tr.client.Transport = t
 		}

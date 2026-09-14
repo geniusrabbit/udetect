@@ -5,6 +5,7 @@ import (
 	"net"
 	"strings"
 
+	"github.com/geniusrabbit/gogeo"
 	"github.com/google/uuid"
 
 	"github.com/geniusrabbit/udetect/protocol"
@@ -144,8 +145,8 @@ func (c *Client) Detect(ctx context.Context, req *Request) (*Response, error) {
 			IP:            net.ParseIP(resp.Geo.GetIp()),
 			Lat:           float64(resp.Geo.GetLat()),
 			Lon:           float64(resp.Geo.GetLon()),
-			Country:       resp.Geo.GetCountry(),
-			Region:        resp.Geo.GetRegion(),
+			Country:       gogeo.CountryCode2ByString(resp.Geo.GetCountry()),
+			Region:        gogeo.RegionCodeByString(resp.Geo.GetRegion()),
 			RegionFIPS104: resp.Geo.GetRegionFIPS104(),
 			Metro:         resp.Geo.GetMetro(),
 			City:          resp.Geo.GetCity(),

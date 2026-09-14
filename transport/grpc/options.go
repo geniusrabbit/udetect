@@ -5,7 +5,6 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 
 	"google.golang.org/grpc/credentials"
@@ -45,7 +44,7 @@ func (opt *Options) TransportCredentials() (credentials.TransportCredentials, er
 
 	// Create a certificate pool from the certificate authority
 	certPool := x509.NewCertPool()
-	ca, err := ioutil.ReadFile(opt.RootCrtFile)
+	ca, err := os.ReadFile(opt.RootCrtFile)
 	if err != nil {
 		return nil, fmt.Errorf("could not read ca certificate: %s", err)
 	}

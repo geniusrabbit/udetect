@@ -55,7 +55,7 @@ func (tr *Transport) Detect(ctx context.Context, req *protocol.Request) (*protoc
 	if err != nil {
 		return nil, err
 	}
-	defer httpResponse.Body.Close()
+	defer func() { _ = httpResponse.Body.Close() }()
 	resp := &protocol.Response{}
 	err = json.NewDecoder(httpResponse.Body).Decode(resp)
 	if err != nil {

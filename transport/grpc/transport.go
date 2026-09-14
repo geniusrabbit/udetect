@@ -10,6 +10,7 @@ import (
 
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/connectivity"
 
 	"github.com/geniusrabbit/udetect/protocol"
 )
@@ -40,12 +41,9 @@ func NewTransport(ctx context.Context, grpcAddress string, options ...Option) (*
 		return nil, errors.Wrap(err, `GRPC transport credentials`)
 	}
 
-	// Establich new connection and create GRPC API client
+	// Establish new connection and create GRPC API client
 	grpcClient.cliConn, grpcClient.DetectorClient, err = newGRPCClient(ctx, opts.GRPCAddress, []grpc.DialOption{
-		// DialOption which configures a connection level security credentials
 		grpc.WithTransportCredentials(creds),
-		// Dial blocks until the underlying connection is up
-		grpc.WithBlock(),
 	}...)
 
 	if err != nil {
@@ -91,7 +89,7 @@ func dial(ctx context.Context, network, addr string, opts ...grpc.DialOption) (*
 	case "tcp", "grpc":
 		return dialTCP(ctx, addr, opts...)
 	case "dns":
-		return grpc.DialContext(ctx, addr, opts...)
+		return dialGRPC(ctx, addr, opts...)
 	case "unix":
 		return dialUnix(ctx, addr, opts...)
 	default:
@@ -113,17 +111,42 @@ func dialTCP(ctx context.Context, addr string, opts ...grpc.DialOption) (*grpc.C
 		}
 		addr = ip.String() + ":" + port
 	}
-	return grpc.DialContext(ctx, addr, opts...)
+	return dialGRPC(ctx, addr, opts...)
 }
 
 // dialUnix creates a client connection via a unix domain socket.
 // "addr" must be a valid path to the socket.
 func dialUnix(ctx context.Context, addr string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
-	return grpc.DialContext(ctx, addr, append(opts,
+	return dialGRPC(ctx, addr, append(opts,
 		grpc.WithContextDialer(func(ctx context.Context, addr string) (net.Conn, error) {
 			if deadline, ok := ctx.Deadline(); ok {
 				return net.DialTimeout("unix", addr, time.Until(deadline))
 			}
 			return net.DialTimeout("unix", addr, 0)
 		}))...)
+}
+
+func dialGRPC(ctx context.Context, addr string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+	conn, err := grpc.NewClient(addr, opts...)
+	if err != nil {
+		return nil, err
+	}
+	conn.Connect()
+	for {
+		state := conn.GetState()
+		switch state {
+		case connectivity.Ready:
+			return conn, nil
+		case connectivity.Shutdown:
+			_ = conn.Close()
+			return nil, fmt.Errorf("grpc connection shutdown")
+		}
+		if !conn.WaitForStateChange(ctx, state) {
+			_ = conn.Close()
+			if err := ctx.Err(); err != nil {
+				return nil, err
+			}
+			return nil, fmt.Errorf("grpc connection wait interrupted")
+		}
+	}
 }

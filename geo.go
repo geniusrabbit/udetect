@@ -11,18 +11,18 @@ const UndefinedCountryCode = gogeo.UndefinedCountryCodeISO2
 
 // Geo base information structure
 type Geo struct {
-	ID            uint             `json:"id,omitempty"`            // Internal geo ID
-	IP            net.IP           `json:"ip,omitempty"`            // IPv4/6
-	Carrier       *Carrier         `json:"carrier,omitempty"`       // Carrier or ISP derived from the IP address
-	Lat           float64          `json:"lat,omitempty"`           // Latitude from -90 to 90
-	Lon           float64          `json:"lon,omitempty"`           // Longitude from -180 to 180
-	Country       gogeo.Code2      `json:"country,omitempty"`       // Country using ISO 3166-1 Alpha 2
-	Region        gogeo.RegionCode `json:"region,omitempty"`        // Region using ISO 3166-2
-	RegionFIPS104 string           `json:"regionFIPS104,omitempty"` // Region of a country using FIPS 10-4
-	Metro         string           `json:"metro,omitempty"`         //
-	City          string           `json:"city,omitempty"`          //
-	ZIP           string           `json:"zip,omitempty"`           //
-	UTCOffset     int              `json:"utcoffset,omitempty"`     // Local time as the number +/- of minutes from UTC
+	ID            uint               `json:"id,omitempty"`            // Internal geo ID
+	IP            net.IP             `json:"ip,omitempty"`            // IPv4/6
+	Carrier       *Carrier           `json:"carrier,omitempty"`       // Carrier or ISP derived from the IP address
+	Lat           float64            `json:"lat,omitempty"`           // Latitude from -90 to 90
+	Lon           float64            `json:"lon,omitempty"`           // Longitude from -180 to 180
+	Country       gogeo.CountryCode2 `json:"country,omitempty"`       // Country using ISO 3166-1 Alpha 2
+	Region        gogeo.RegionCode   `json:"region,omitempty"`        // Region using ISO 3166-2
+	RegionFIPS104 string             `json:"regionFIPS104,omitempty"` // Region of a country using FIPS 10-4
+	Metro         string             `json:"metro,omitempty"`         //
+	City          string             `json:"city,omitempty"`          //
+	ZIP           string             `json:"zip,omitempty"`           //
+	UTCOffset     int                `json:"utcoffset,omitempty"`     // Local time as the number +/- of minutes from UTC
 }
 
 // GeoDefault value

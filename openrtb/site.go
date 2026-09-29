@@ -15,7 +15,7 @@ func SiteFrom(s *udetect.Site) *openrtb.Site {
 		Inventory: openrtb.Inventory{
 			ID:            s.ExtID,                 // External ID
 			Keywords:      s.Keywords,              // Comma separated list of keywords about the site.
-			Cat:           s.Cat,                   // Array of IAB content categories
+			Cat:           s.Content10Codes(),      // Content Taxonomy 1.0 codes
 			Domain:        s.Domain,                //
 			PrivacyPolicy: intRef(s.PrivacyPolicy), // Default: 1 ("1": has a privacy policy)
 		},

@@ -13,10 +13,10 @@ func ApplicationFrom(a *udetect.App) *openrtb.App {
 	}
 	return &openrtb.App{
 		Inventory: openrtb.Inventory{
-			ID:            a.ExtID,                                      // External ID
-			Keywords:      a.Keywords,                                   // Comma separated list of keywords about the site.
-			Categories:    gocast.Slice[openrtb.ContentCategory](a.Cat), // Array of IAB content categories
-			PrivacyPolicy: intRef(a.PrivacyPolicy),                      // Default: 1 ("1": has a privacy policy)
+			ID:            a.ExtID,                                                   // External ID
+			Keywords:      a.Keywords,                                                // Comma separated list of keywords about the site.
+			Categories:    gocast.Slice[openrtb.ContentCategory](a.Content10Codes()), // Content Taxonomy 1.0 codes
+			PrivacyPolicy: intRef(a.PrivacyPolicy),                                   // Default: 1 ("1": has a privacy policy)
 		},
 		Bundle:   a.Bundle,   // App bundle or package name
 		StoreURL: a.StoreURL, // App store URL for an installed app

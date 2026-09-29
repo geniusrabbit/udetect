@@ -6,15 +6,23 @@ import (
 
 // Site information
 type Site struct {
-	ExtID         string   `json:"eid,omitempty"`          // External ID
-	Domain        string   `json:"domain,omitempty"`       //
-	Cat           []string `json:"cat,omitempty"`          // Array of categories
-	PrivacyPolicy int      `json:"pivacypolicy,omitempty"` // Default: 1 ("1": has a privacy policy)
-	Keywords      string   `json:"keywords,omitempty"`     // Comma separated list of keywords about the site.
-	Page          string   `json:"page,omitempty"`         // URL of the page
-	Referrer      string   `json:"ref,omitempty"`          // Referrer URL
-	Search        string   `json:"search,omitempty"`       // Search string that caused naviation
-	Mobile        int      `json:"mobile,omitempty"`       // Mobile ("1": site is mobile optimised)
+	ExtID         string `json:"eid,omitempty"`          // External ID
+	Domain        string `json:"domain,omitempty"`       //
+	R0Cat         []uint `json:"r0cat,omitempty"`        // r0 category ids
+	PrivacyPolicy int    `json:"pivacypolicy,omitempty"` // Default: 1 ("1": has a privacy policy)
+	Keywords      string `json:"keywords,omitempty"`     // Comma separated list of keywords about the site.
+	Page          string `json:"page,omitempty"`         // URL of the page
+	Referrer      string `json:"ref,omitempty"`          // Referrer URL
+	Search        string `json:"search,omitempty"`       // Search string that caused naviation
+	Mobile        int    `json:"mobile,omitempty"`       // Mobile ("1": site is mobile optimised)
+}
+
+// Content10Codes returns Content Taxonomy 1.0 codes for the r0 ids. An id without that code is skipped.
+func (s *Site) Content10Codes() []string {
+	if s == nil {
+		return nil
+	}
+	return content10Codes(s.R0Cat)
 }
 
 // SiteDefault info

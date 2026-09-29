@@ -14,11 +14,11 @@ func SiteFrom(s *udetect.Site) *openrtb.Site {
 	}
 	return &openrtb.Site{
 		Inventory: openrtb.Inventory{
-			ID:            s.ExtID,                                      // External ID
-			Keywords:      s.Keywords,                                   // Comma separated list of keywords about the site.
-			Categories:    gocast.Slice[openrtb.ContentCategory](s.Cat), // Array of IAB content categories
-			Domain:        s.Domain,                                     //
-			PrivacyPolicy: intRef(s.PrivacyPolicy),                      // Default: 1 ("1": has a privacy policy)
+			ID:            s.ExtID,                                                   // External ID
+			Keywords:      s.Keywords,                                                // Comma separated list of keywords about the site.
+			Categories:    gocast.Slice[openrtb.ContentCategory](s.Content10Codes()), // Content Taxonomy 1.0 codes
+			Domain:        s.Domain,                                                  //
+			PrivacyPolicy: intRef(s.PrivacyPolicy),                                   // Default: 1 ("1": has a privacy policy)
 		},
 		Page:     s.Page,     // URL of the page
 		Referrer: s.Referrer, // Referrer URL

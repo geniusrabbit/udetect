@@ -14,7 +14,7 @@ func ApplicationFrom(a *udetect.App) *openrtb.App {
 		Inventory: openrtb.Inventory{
 			ID:            a.ExtID,                 // External ID
 			Keywords:      a.Keywords,              // Comma separated list of keywords about the site.
-			Cat:           a.Cat,                   // Array of IAB content categories
+			Cat:           a.Content10Codes(),      // Content Taxonomy 1.0 codes
 			PrivacyPolicy: intRef(a.PrivacyPolicy), // Default: 1 ("1": has a privacy policy)
 		},
 		Bundle:   a.Bundle,   // App bundle or package name

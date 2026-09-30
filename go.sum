@@ -52,6 +52,8 @@ github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINE
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rtb-0/rtbdict v0.0.0-20260929120202-eff2f129e380 h1:6gvw3aCzF8KAaBuniTSw/OMennzNuuZj+SipyjMaKuI=
 github.com/rtb-0/rtbdict v0.0.0-20260929120202-eff2f129e380/go.mod h1:Pd2FirhA5WWR7Vra44o2HBOOjUKZQViAlbj5etixR/Q=
+github.com/rtb-0/rtbdict v0.0.0-20260930080334-2cd28f6a6de9 h1:zc87PyzCHtFtRlY0QHRwBa2W1kkMMVTuqVMAn7Y/fzw=
+github.com/rtb-0/rtbdict v0.0.0-20260930080334-2cd28f6a6de9/go.mod h1:Pd2FirhA5WWR7Vra44o2HBOOjUKZQViAlbj5etixR/Q=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.5.1/go.mod h1:5W2xD1RspED5o8YsWQXVCued0rvSQ+mT+I5cxcmMvtA=
 github.com/stretchr/testify v1.12.1 h1:EuwCh5fleGS7H32xRwO3wRGT7DxrDhLAT6FF8MpWDWE=

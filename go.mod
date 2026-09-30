@@ -11,7 +11,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.31.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/pkg/errors v0.9.1
-	github.com/rtb-0/rtbdict v0.0.0-20260929120202-eff2f129e380
+	github.com/rtb-0/rtbdict v0.0.0-20260930080334-2cd28f6a6de9
 	github.com/stretchr/testify v1.12.1
 	google.golang.org/genproto/googleapis/api v0.0.0-20260928230214-8a89bd6388cc
 	google.golang.org/grpc v1.84.0

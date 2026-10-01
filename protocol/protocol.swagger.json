@@ -338,11 +338,6 @@
     "udetectGeoLocation": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "format": "uint64",
-          "title": "Internal ID"
-        },
         "ip": {
           "type": "string",
           "title": "IPv4/6"

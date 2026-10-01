@@ -141,7 +141,6 @@ func (c *Client) Detect(ctx context.Context, req *Request) (*Response, error) {
 			HwVer:      resp.Device.GetHwver(),
 		},
 		Geo: &Geo{
-			ID:            uint(resp.Geo.GetId()),
 			IP:            net.ParseIP(resp.Geo.GetIp()),
 			Lat:           float64(resp.Geo.GetLat()),
 			Lon:           float64(resp.Geo.GetLon()),
@@ -151,7 +150,7 @@ func (c *Client) Detect(ctx context.Context, req *Request) (*Response, error) {
 			Metro:         resp.Geo.GetMetro(),
 			City:          resp.Geo.GetCity(),
 			ZIP:           resp.Geo.GetZip(),
-			UTCOffset:     int(resp.Geo.GetId()),
+			UTCOffset:     int(resp.Geo.GetUtcOffset()),
 			Carrier: &Carrier{
 				ID:   uint(resp.Geo.GetCarrier().GetId()),
 				Name: resp.Geo.GetCarrier().GetName(),

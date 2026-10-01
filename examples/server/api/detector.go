@@ -42,7 +42,6 @@ func (d *Detector) Detect(ctx context.Context, req *protocol.Request) (*protocol
 			},
 		},
 		Geo: &protocol.GeoLocation{
-			Id: 1,
 			Carrier: &protocol.Carrier{
 				Id:   1,
 				Name: "test",

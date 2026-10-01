@@ -138,38 +138,35 @@ message Device {
 }
 
 message GeoLocation {
-  // Internal ID
-  uint64      id = 1;
-
   // IPv4/6
-  string      ip = 2;
+  string      ip = 1;
 
   // Carrier or ISP derived from the IP address
-  Carrier     carrier = 3;
+  Carrier     carrier = 2;
 
   // Latitude from -90 to 90
-  float       lat = 4;
+  float       lat = 3;
 
   // Longitude from -180 to 180
-  float       lon = 5;
+  float       lon = 4;
 
   // Country using ISO 3166-1 Alpha 2
-  string      country = 6;
+  string      country = 5;
 
   // Region using ISO 3166-2
-  string      region = 7;
+  string      region = 6;
 
   // Region of a country using FIPS 10-4
-  string      regionFIPS104 = 8;
+  string      regionFIPS104 = 7;
 
-  string      metro = 9;
+  string      metro = 8;
 
-  string      city = 10;
+  string      city = 9;
 
-  string      zip = 11;
+  string      zip = 10;
 
   // Local time as the number +/- of minutes from UTC
-	int32       utc_offset = 12;
+  int32       utc_offset = 11;
 }
 
 message Request {

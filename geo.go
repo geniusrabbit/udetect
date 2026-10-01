@@ -11,7 +11,6 @@ const UndefinedCountryCode = gogeo.UndefinedCountryCodeISO2
 
 // Geo base information structure
 type Geo struct {
-	ID            uint               `json:"id,omitempty"`            // Internal geo ID
 	IP            net.IP             `json:"ip,omitempty"`            // IPv4/6
 	Carrier       *Carrier           `json:"carrier,omitempty"`       // Carrier or ISP derived from the IP address
 	Lat           float64            `json:"lat,omitempty"`           // Latitude from -90 to 90
@@ -23,6 +22,14 @@ type Geo struct {
 	City          string             `json:"city,omitempty"`          //
 	ZIP           string             `json:"zip,omitempty"`           //
 	UTCOffset     int                `json:"utcoffset,omitempty"`     // Local time as the number +/- of minutes from UTC
+}
+
+// CountryID is the interned country id from Country, or 0 when Geo is nil or the code is unknown.
+func (g *Geo) CountryID() uint64 {
+	if g == nil {
+		return 0
+	}
+	return uint64(g.Country.ID())
 }
 
 // GeoDefault value

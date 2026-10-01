@@ -9,3 +9,12 @@ type OS struct {
 
 // OSDefault value
 var OSDefault OS
+
+// Clone a new OS
+func (o *OS) Clone() *OS {
+	return &OS{
+		ID:      o.ID,
+		Name:    o.Name,
+		Version: o.Version,
+	}
+}

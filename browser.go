@@ -29,3 +29,26 @@ type Extension struct {
 
 // BrowserDefault value
 var BrowserDefault Browser
+
+// Clone a new Browser
+func (b *Browser) Clone() *Browser {
+	return &Browser{
+		ID:              b.ID,
+		Name:            b.Name,
+		Version:         b.Version,
+		DNT:             b.DNT,
+		LMT:             b.LMT,
+		AdBlock:         b.AdBlock,
+		PrivateBrowsing: b.PrivateBrowsing,
+		IsRobot:         b.IsRobot,
+		JS:              b.JS,
+		UA:              b.UA,
+		Ref:             b.Ref,
+		Languages:       b.Languages,
+		PrimaryLanguage: b.PrimaryLanguage,
+		FlashVer:        b.FlashVer,
+		Width:           b.Width,
+		Height:          b.Height,
+		Extensions:      b.Extensions,
+	}
+}

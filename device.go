@@ -19,3 +19,16 @@ type Device struct {
 
 // DeviceDefault value
 var DeviceDefault = Device{Browser: &BrowserDefault, OS: &OSDefault}
+
+// Clone a new Device
+func (d *Device) Clone() *Device {
+	return &Device{
+		ID:         d.ID,
+		Make:       d.Make,
+		Model:      d.Model,
+		OS:         d.OS.Clone(),
+		Browser:    d.Browser.Clone(),
+		ConnType:   d.ConnType,
+		DeviceType: d.DeviceType,
+	}
+}

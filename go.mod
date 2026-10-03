@@ -6,6 +6,7 @@ require (
 	github.com/bsm/openrtb v2.1.2+incompatible
 	github.com/bsm/openrtb/v3 v3.2.1
 	github.com/demdxx/gocast/v2 v2.12.2
+	github.com/demdxx/langlib v0.0.0-20261003075711-e0ae5360cecc
 	github.com/geniusrabbit/gogeo v1.1.1
 	github.com/google/uuid v1.6.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.31.0

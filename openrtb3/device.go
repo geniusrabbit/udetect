@@ -60,35 +60,35 @@ func DeviceFrom(d *udetect.Device, geo *udetect.Geo) *openrtb.Device {
 	}
 
 	return &openrtb.Device{
-		UA:           browser.UA,                      // User agent
-		Geo:          GeoFrom(geo),                    // Location of the device assumed to be the user’s current location
-		DNT:          int(browser.DNT),                // "1": Do not track
-		LMT:          int(browser.LMT),                // "1": Limit Ad Tracking
-		IP:           ipV4,                            // IPv4
-		IPv6:         geo.IPv6String(),                // IPv6
-		DeviceType:   OpenRTBDeviceType(d.DeviceType), // The general type of d.
-		Make:         d.Make,                          // Device make
-		Model:        d.Model,                         // Device model
-		OS:           os.Name,                         // Device OS
-		OSVersion:    os.Version,                      // Device OS version
-		HWVersion:    d.HwVer,                         // Hardware version of the device (e.g., "5S" for iPhone 5S).
-		Height:       d.Height,                        // Physical height of the screen in pixels.
-		Width:        d.Width,                         // Physical width of the screen in pixels.
-		PPI:          d.PPI,                           // Screen size as pixels per linear inch.
-		PixelRatio:   d.PxRatio,                       // The ratio of physical pixels to device independent pixels.
-		JS:           int(browser.JS),                 // Javascript status ("0": Disabled, "1": Enabled)
-		GeoFetch:     0,                               // Indicates if the geolocation API will be available to JavaScript code running in the banner,
-		FlashVersion: browser.FlashVer,                // Flash version
-		Language:     browser.PrimaryLanguage,         // Browser language
-		Carrier:      carrier.Name,                    // Carrier or ISP derived from the IP address
-		MCCMNC:       "",                              // Mobile carrier as the concatenated MCC-MNC code (e.g., "310-005" identifies Verizon Wireless CDMA in the USA).
-		ConnType:     openrtb.ConnType(d.ConnType),    // Network connection type.
-		IFA:          d.IFA,                           // Native identifier for advertisers
-		IDSHA1:       "",                              // SHA1 hashed device ID
-		IDMD5:        "",                              // MD5 hashed device ID
-		PIDSHA1:      "",                              // SHA1 hashed platform device ID
-		PIDMD5:       "",                              // MD5 hashed platform device ID
-		MacSHA1:      "",                              // SHA1 hashed device ID; IMEI when available, else MEID or ESN
-		MacMD5:       "",                              // MD5 hashed device ID; IMEI when available, else MEID or ESN
+		UA:           browser.UA,                                    // User agent
+		Geo:          GeoFrom(geo),                                  // Location of the device assumed to be the user’s current location
+		DNT:          int(browser.DNT),                              // "1": Do not track
+		LMT:          int(browser.LMT),                              // "1": Limit Ad Tracking
+		IP:           ipV4,                                          // IPv4
+		IPv6:         geo.IPv6String(),                              // IPv6
+		DeviceType:   OpenRTBDeviceType(d.DeviceType),               // The general type of d.
+		Make:         d.Make,                                        // Device make
+		Model:        d.Model,                                       // Device model
+		OS:           os.Name,                                       // Device OS
+		OSVersion:    os.Version,                                    // Device OS version
+		HWVersion:    d.HwVer,                                       // Hardware version of the device (e.g., "5S" for iPhone 5S).
+		Height:       d.Height,                                      // Physical height of the screen in pixels.
+		Width:        d.Width,                                       // Physical width of the screen in pixels.
+		PPI:          d.PPI,                                         // Screen size as pixels per linear inch.
+		PixelRatio:   d.PxRatio,                                     // The ratio of physical pixels to device independent pixels.
+		JS:           int(browser.JS),                               // Javascript status ("0": Disabled, "1": Enabled)
+		GeoFetch:     0,                                             // Indicates if the geolocation API will be available to JavaScript code running in the banner,
+		FlashVersion: browser.FlashVer,                              // Flash version
+		Language:     udetect.LanguageISO2(browser.PrimaryLanguage), // ISO-639-1
+		Carrier:      carrier.Name,                                  // Carrier or ISP derived from the IP address
+		MCCMNC:       "",                                            // Mobile carrier as the concatenated MCC-MNC code (e.g., "310-005" identifies Verizon Wireless CDMA in the USA).
+		ConnType:     openrtb.ConnType(d.ConnType),                  // Network connection type.
+		IFA:          d.IFA,                                         // Native identifier for advertisers
+		IDSHA1:       "",                                            // SHA1 hashed device ID
+		IDMD5:        "",                                            // MD5 hashed device ID
+		PIDSHA1:      "",                                            // SHA1 hashed platform device ID
+		PIDMD5:       "",                                            // MD5 hashed platform device ID
+		MacSHA1:      "",                                            // SHA1 hashed device ID; IMEI when available, else MEID or ESN
+		MacMD5:       "",                                            // MD5 hashed device ID; IMEI when available, else MEID or ESN
 	}
 }

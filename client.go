@@ -5,6 +5,7 @@ import (
 	"net"
 	"strings"
 
+	"github.com/demdxx/langlib"
 	"github.com/geniusrabbit/gogeo"
 	"github.com/google/uuid"
 
@@ -13,24 +14,24 @@ import (
 
 // Request object
 type Request struct {
-	UDID            string      `json:"udid,omitempty"` // Advertisement Device ID (IDFA, AAID), Identifier for Advertising (IFA)
-	UID             uuid.UUID   `json:"uid,omitempty"`
-	SessID          uuid.UUID   `json:"sessid,omitempty"`
-	IP              string      `json:"ip,omitempty"`
-	UA              string      `json:"ua,omitempty"`
-	URL             string      `json:"url,omitempty"`
-	Ref             string      `json:"r,omitempty"`     // Referer
-	DNT             int8        `json:"dnt,omitempty"`   // "1": Do not track
-	LMT             int8        `json:"lmt,omitempty"`   // "1": Limit Ad Tracking
-	AdBlock         int8        `json:"ab,omitempty"`    // "1": AdBlock is ON
-	PrivateBrowsing int8        `json:"pb,omitempty"`    // "1": Private Browsing mode ON
-	JS              int8        `json:"js,omitempty"`    //
-	Languages       []string    `json:"langs,omitempty"` //
-	PrimaryLanguage string      `json:"lang,omitempty"`  // Browser language (en-US)
-	FlashVer        string      `json:"flver,omitempty"` // Flash version
-	Width           int         `json:"w,omitempty"`     // Window in pixels
-	Height          int         `json:"h,omitempty"`     // Window in pixels
-	Extensions      []Extension `json:"extensions,omitempty"`
+	UDID            string         `json:"udid,omitempty"` // Advertisement Device ID (IDFA, AAID), Identifier for Advertising (IFA)
+	UID             uuid.UUID      `json:"uid,omitempty"`
+	SessID          uuid.UUID      `json:"sessid,omitempty"`
+	IP              string         `json:"ip,omitempty"`
+	UA              string         `json:"ua,omitempty"`
+	URL             string         `json:"url,omitempty"`
+	Ref             string         `json:"r,omitempty"`     // Referer
+	DNT             int8           `json:"dnt,omitempty"`   // "1": Do not track
+	LMT             int8           `json:"lmt,omitempty"`   // "1": Limit Ad Tracking
+	AdBlock         int8           `json:"ab,omitempty"`    // "1": AdBlock is ON
+	PrivateBrowsing int8           `json:"pb,omitempty"`    // "1": Private Browsing mode ON
+	JS              int8           `json:"js,omitempty"`    //
+	Languages       []langlib.Code `json:"langs,omitempty"` // ISO-639-1
+	PrimaryLanguage langlib.Code   `json:"lang,omitempty"`  // ISO-639-1
+	FlashVer        string         `json:"flver,omitempty"` // Flash version
+	Width           int            `json:"w,omitempty"`     // Window in pixels
+	Height          int            `json:"h,omitempty"`     // Window in pixels
+	Extensions      []Extension    `json:"extensions,omitempty"`
 }
 
 // Response object
@@ -73,8 +74,8 @@ func (c *Client) Detect(ctx context.Context, req *Request) (*Response, error) {
 		Adblock:         req.AdBlock == 1,
 		PrivateBrowsing: req.PrivateBrowsing == 1,
 		Js:              req.JS == 1,
-		Languages:       req.Languages,
-		PrimaryLanguage: req.PrimaryLanguage,
+		Languages:       LanguagesISO2(req.Languages),
+		PrimaryLanguage: LanguageISO2(req.PrimaryLanguage),
 		FlashVer:        req.FlashVer,
 		Width:           int32(req.Width),
 		Height:          int32(req.Height),

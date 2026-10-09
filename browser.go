@@ -4,7 +4,8 @@ import "github.com/demdxx/langlib"
 
 // Browser base information structure
 type Browser struct {
-	ID              uint64         `json:"id,omitempty"`   // Internal system ID
+	ID              uint64         `json:"id,omitempty"`   // Internal system ID (catalog root)
+	VersionID       uint64         `json:"vid,omitempty"`  // Catalog version row ID
 	Name            string         `json:"name,omitempty"` //
 	Version         string         `json:"ver,omitempty"`  //
 	DNT             int8           `json:"dnt,omitempty"`  // "1": Do not track
@@ -36,6 +37,7 @@ var BrowserDefault Browser
 func (b *Browser) Clone() *Browser {
 	return &Browser{
 		ID:              b.ID,
+		VersionID:       b.VersionID,
 		Name:            b.Name,
 		Version:         b.Version,
 		DNT:             b.DNT,

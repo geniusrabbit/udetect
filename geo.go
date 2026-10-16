@@ -61,3 +61,33 @@ func (g *Geo) IPv6String() string {
 	}
 	return g.IP.String()
 }
+
+func (g *Geo) SetUTCOffsetWithAutocorrection(offset int) {
+	if g == nil {
+		return
+	}
+	if offset == 0 {
+		return
+	}
+	g.UTCOffset = PrepareUTCOffset(offset)
+}
+
+func PrepareUTCOffset(offset int) int {
+	if offset == 0 {
+		return 0
+	}
+	if offset < -12*60 {
+		offset = -12 * 60
+	}
+	if offset > 12*60 {
+		offset = 12 * 60
+	}
+	if offset%30 != 0 {
+		if offCor := offset % 30; offCor > 20 {
+			offset += 30 - offCor
+		} else {
+			offset -= offCor
+		}
+	}
+	return offset
+}

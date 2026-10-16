@@ -151,7 +151,7 @@ func (c *Client) Detect(ctx context.Context, req *Request) (*Response, error) {
 			Metro:         resp.Geo.GetMetro(),
 			City:          resp.Geo.GetCity(),
 			ZIP:           resp.Geo.GetZip(),
-			UTCOffset:     int(resp.Geo.GetUtcOffset()),
+			UTCOffset:     PrepareUTCOffset(int(resp.Geo.GetUtcOffset())),
 			Carrier: &Carrier{
 				ID:   uint(resp.Geo.GetCarrier().GetId()),
 				Name: resp.Geo.GetCarrier().GetName(),
